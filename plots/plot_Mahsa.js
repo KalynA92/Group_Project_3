@@ -137,14 +137,43 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         else if (ID === 4) {
             data = geoFive;
         };
-        
-        d3.select("#mapme").html("<div id='map'><div/>");
-        let map = L.map('map').setView(data[0], 13);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        d3.select("#mapme").html("<div id='map'><div/>");
+        //untroducing layers to map
+        let osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap'
-        }).addTo(map);
+        });
+
+        let streets = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+
+        let watercolor = L.tileLayer('http://stamen-tiles-d.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+
+        let  terrain = L.tileLayer('http://stamen-tiles-c.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+        let map = L.map('map', {
+            center: data[0],
+            zoom: 10,
+            layers: [osm, streets, watercolor]
+        });
+
+        let baseMaps = {
+            "OpenStreetMap": osm,
+            "Mapbox Streets": streets,
+            "Water Color": watercolor,
+            "Terrain": terrain
+        };
+
+        let layerControl = L.control.layers(baseMaps).addTo(map);
+
         let markers = [];
         for (let i = 0; i < data.length; i++) {
             let marker = L.marker(data[i], { icon: ufoIcon }).addTo(map);
@@ -154,8 +183,72 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
 
     };
 
+    /************ 3D plotly ************/
+    // gathering the latitude, longitude, time and shape of reports on a date
+    function getInfo(list) {
+        let round = [];
+        let pointy = [];
+        let light = [];
+        let others = [];
+        for (let i = 0; i < list.length; i++) {
+            target = list[i];
+            let info = [];
+            if (target.shape == "disk" && "circle" && "cigar" && "sphere" && "egg" && "oval" && "fireball" && "cylinder"){
+                info.push(target.latidude);
+                info.push(target.longitude);
+                let time = target.time;
+                let splited = time.splot(":");
+                let hour = (parseInt(splited[0]));
+                info.push(hour);
+                round.push(info);
+            }
+            else if (target.shape == "triangle" && "rectangle" ){
+                info.push(target.latidude);
+                info.push(target.longitude);
+                let time = target.time;
+                let splited = time.splot(":");
+                let hour = (parseInt(splited[0]));
+                info.push(hour);
+                pointy.push(info);
+            }
+            else if (target.shape == "light" && "flash"){
+                info.push(target.latidude);
+                info.push(target.longitude);
+                let time = target.time;
+                let splited = time.splot(":");
+                let hour = (parseInt(splited[0]));
+                info.push(hour);
+                light.push(info);
+            }
+            else if (target.shape == "unknown" && "other" && "changing" && "formation" ){
+                info.push(target.latidude);
+                info.push(target.longitude);
+                let time = target.time;
+                let splited = time.splot(":");
+                let hour = (parseInt(splited[0]));
+                info.push(hour);
+                others.push(info);
+            };
+
+
+
+
+        };
+
+        return info;
+    };
+
+
+
+
+
+
+
+
+
+
     // Make the map update on change dates
-    d3.selectAll(".dateOptions").on("change", function(){
+    d3.selectAll(".dateOptions").on("change", function () {
         let ID = this.options[this.selectedIndex].value; // Get the choisen id
         mapMe(parseInt(ID));
     });
