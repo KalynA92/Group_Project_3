@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>UFO Sightings</title>
+        <link rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+            crossorigin />
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin></script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700'
+            rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="../css/style_mahsa.css" />
+        <link href="https://fonts.cdnfonts.com/css/alien-2" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/papercutz" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/zombie-control"
+            rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/red-hat-display"
+            rel="stylesheet">
+        <style>
+       /*style of website header box*/
+      .jumbotron {
+        background: #a4f022 linear-gradient(#a4f022, #cc68e4);
+        background-size: 100% 100%;
+        text-align: center;
+        width: 30%;
+        height:10%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: -20px;
+        padding : 20px;
+        border-bottom-left-radius: 60px;
+        border-bottom-right-radius: 60px;
+        opacity: 95%;
+        display: block;
+
+      }
+      /*style of introductions box*/
+      .intro {
+        background: #4430ba ;
+        background-image: url("https://images.squarespace-cdn.com/content/v1/590b7ec659cc6849fc2e6a12/1554154221978-IDVRNZ6P5TDH41JCD267/Astronaut_WithEnvironment_Animation.gif?format=2500w");
+        background-size: 100% 100%;
+        text-align: center;
+        width: 50%;
+        height: 50%;
+        margin: auto;
+        margin-top: 40px;
+        padding: 10px;
+        border-radius: 10px;
+        opacity: 100%
+      }
+      /*Style of text box*/
+      .information {
+        background: #340058;
+        border: solid;
+        border-color: #4430ba;
+        border-width: 3px;
+        background-size: 100% 100%;
+        text-align: center;
+        width: 70%;
+        height: 300px;
+        margin: auto;
+        padding: 10px;
+        border-radius: 25px;
+        overflow: scroll;
+        opacity: 80%
+
+      }  
+    </style>
+    </head>
+
+    <body> <!--website header section -->
+        <div>
+            <div class="jumbotron" style="text-align:center">
+                <h2 id="title">UFO Sightings</h2>
+                <div class="gif">
+                    <img id="gif" height="120" width="120"
+                        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHc0emdxd20xeW83N28xZ3NodjUzZjRkaGRnNDdxaHZnM3FiZmc3NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/ygwYWMzryjq2ka87QY/giphy.gif" />
+                </div>
+                <h3 id="header2">What are they hiding from us?</h3>
+            </div>
+        </div>
+        <!-- start of flying aliens -->
+        <div style="float: left; height: 200px;">
+            <div>
+                <img height=40px
+                    src="https://media4.giphy.com/media/UvPosZsGWpzMtjukz4/giphy.gif?cid=ecf05e47r7yafnu7lsku1wnnfzadjq4qtb4adi4252v9erfc&ep=v1_gifs_related&rid=giphy.gif&ct=s" />
+            </div>
+            <div>
+                <img height=40px
+                    src="https://media4.giphy.com/media/UvPosZsGWpzMtjukz4/giphy.gif?cid=ecf05e47r7yafnu7lsku1wnnfzadjq4qtb4adi4252v9erfc&ep=v1_gifs_related&rid=giphy.gif&ct=s" />
+            </div>
+            <div">
+                <img height=40px
+                    src="https://media4.giphy.com/media/UvPosZsGWpzMtjukz4/giphy.gif?cid=ecf05e47r7yafnu7lsku1wnnfzadjq4qtb4adi4252v9erfc&ep=v1_gifs_related&rid=giphy.gif&ct=s" />
+            </div>
+        </div>
+        <div style="float: right; height: 200px;">
+            <div>
+                <img height=40px
+                    src="https://media4.giphy.com/media/UvPosZsGWpzMtjukz4/giphy.gif?cid=ecf05e47r7yafnu7lsku1wnnfzadjq4qtb4adi4252v9erfc&ep=v1_gifs_related&rid=giphy.gif&ct=s" />
+            </div>
+            <div>
+                <img height=40px
+                    src="https://media4.giphy.com/media/UvPosZsGWpzMtjukz4/giphy.gif?cid=ecf05e47r7yafnu7lsku1wnnfzadjq4qtb4adi4252v9erfc&ep=v1_gifs_related&rid=giphy.gif&ct=s" />
+            </div>
+            <div">
+                <img height=40px
+                    src="https://media4.giphy.com/media/UvPosZsGWpzMtjukz4/giphy.gif?cid=ecf05e47r7yafnu7lsku1wnnfzadjq4qtb4adi4252v9erfc&ep=v1_gifs_related&rid=giphy.gif&ct=s" />
+            </div>
+        </div>
+        <!-- End of flying Aliens -->
+        <!--
+            The second plot section
+        -->
+        <div id="the second plot description"> <!--Introduction -->
+            <div class="intro">
+                <div style="text-align:center">
+                    <p id="description">A bar plot showing the frequency 
+                        of shapes reported on the most active date of the 
+                        dataset; July 4, 2010 22:00<br /> </p>
+        <div id="plot"></div>
+        <script src="../plots/plot_Kalyn.js"></script>
+    </body>
+</html>

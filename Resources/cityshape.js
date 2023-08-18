@@ -1,1 +1,8 @@
-[{"city":"batesville (near lake santee)","shape":"fireball"},{"city":"belleville","shape":"circle"},{"city":"bothell","shape":"sphere"},{"city":"cutlerville","shape":"sphere"},{"city":"deer park","shape":"changing"},{"city":"fort calhoun","shape":"circle"},{"city":"fort wright","shape":"fireball"},{"city":"gastonia","shape":"fireball"},{"city":"georgetown","shape":"fireball"},{"city":"heathsville","shape":"fireball"},{"city":"indianapolis","shape":"fireball"},{"city":"kingston","shape":"light"},{"city":"lake stevens","shape":"circle"},{"city":"lakewood","shape":"cylinder"},{"city":"lakewood","shape":"fireball"},{"city":"lamesa","shape":"circle"},{"city":"lorain","shape":"circle"},{"city":"lynnwood","shape":"circle"},{"city":"milford","shape":"fireball"},{"city":"montrose","shape":"fireball"},{"city":"north bend","shape":"unknown"},{"city":"paxton","shape":"unknown"},{"city":"piney flats","shape":"other"},{"city":"portsmouth","shape":"light"},{"city":"rio linda","shape":"fireball"},{"city":"selma","shape":"other"},{"city":"springfield","shape":"light"},{"city":"tampa","shape":"unknown"},{"city":"vancouver","shape":"fireball"},{"city":"vancouver","shape":"formation"},{"city":"waterbury","shape":"triangle"}]
+let shapes =
+[{Shape:"fireball",Totals:11},
+{Shape:"circle",Totals:6},
+{Shape:"light",Totals:3},
+{Shape:"unknown",Totals:3},
+{Shape:"other",Totals:2},
+{Shape:"sphere",Totals:2},
+{Shape:"changing",Totals:1}]
