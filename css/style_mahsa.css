@@ -22,8 +22,9 @@ html {
 #header2 {
     font-family: 'Papercutz', sans-serif;
     font-weight: bold;
-    color: #a4f022;
+    color: #991515;
     font-size: 18px;
+    text-shadow: 0 0 2px #9600dc
 }
 
 /* Introduvtion text */
