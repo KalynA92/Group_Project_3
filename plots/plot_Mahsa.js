@@ -3,7 +3,7 @@
  *****************************************/
 
 /******** Data gathering **********/
-const mahsaUrl = "https://raw.githubusercontent.com/KalynA92/Group_Project_3/main/Resources/dateOne.json";
+const mahsaUrl = "https://raw.githubusercontent.com/KalynA92/Group_Project_3/main/Resources/dateFiveDates.json";
 
 d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th plotting in it.
     console.log("data: ", data);
