@@ -44,13 +44,13 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
     console.log("dates: ", dates);
 
     // Add every date in the dates list as an option in the dropdown button
-    let dropdown = d3.select(".dateOptions");
+    let dropdown = d3.select(".MahsaDateOptions");
     for (let i = 0; i < dates.length; i++) {
         let option = dropdown.append("option").text(dates[i]).attr("id", "dates").attr("value", i);
     };
 
     // Introduce a chosen id variable 
-    let choices = d3.select(".dateOptions");
+    let choices = d3.select(".MahsaDateOptions");
     let chosenId = choices.node().value;
 
     // Get the all reported data of chosen date
@@ -138,7 +138,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
             data = geoFive;
         };
 
-        d3.select("#mapme").html("<div id='map'><div/>");
+        d3.select("#MahsaMapMe").html("<div id='MahsaMap'><div/>");
         //untroducing layers to map
         let osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -159,7 +159,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
             maxZoom: 20,
             attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         });
-        let map = L.map('map', {
+        let map = L.map('MahsaMap', {
             center: data[0],
             zoom: 10,
             layers: [osm, streets, watercolor]
@@ -354,7 +354,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         Plotly.newPlot('mahsa_plotly', data, layout);
     };
     // Make the map update on change dates
-    d3.selectAll(".dateOptions").on("change", function () {
+    d3.selectAll(".MahsaDateOptions").on("change", function () {
         let ID = this.options[this.selectedIndex].value; // Get the choisen id
         mapMe(parseInt(ID));
         plotIt(parseInt(ID));
