@@ -61,7 +61,7 @@ html {
 }
 
 /* Leaflet Map style */
-#map {
+#MahsaMap {
     margin: 20px;
     height: 300px;
     border-radius: 20px;
