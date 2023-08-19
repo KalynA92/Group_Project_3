@@ -56,6 +56,34 @@
         border-radius: 10px;
         opacity: 100%
       }
+      /* guide box */
+      .guide {
+        background: #4430ba ;
+        background-image: linear-gradient(to bottom right, #340058, #4430ba);
+        background-size: 100% 100%;
+        text-align: center;
+        width: 80%;
+        height: 50%;
+        margin: auto;
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        opacity: 100%
+      }
+      /* Smaller guide box */
+      .guideSmall {
+        background: #4430ba ;
+        background-image: linear-gradient(to bottom right, #4c0000, #9600dc);
+        background-size: 100% 100%;
+        text-align: center;
+        width: 80%;
+        height: 50%;
+        margin: auto;
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        opacity: 100%
+      }  
       /*Style of text box*/
       .information {
         background: #340058;
@@ -135,14 +163,41 @@
             </div>
         </div>
         <div id="MahsaMapMe"></div> <!-- Map -->
-        <div style="text-align:center"> <!-- plotly 3d scstter plot -->
-            <div id="mahsa_plotly">
+        <div class="guideSmall">
+            <div style="text-align:center">
+                <p id="guideMe"> Geometric shapes can look diffrently from
+                    diffrent perspective.<br />like cube can be seen as any
+                    quadrilaterals depending on the prespective. For the sake of
+                    this analysis, we grouped all the rounded shapes like
+                    spheres, ovals, etc. in the same category and all the
+                    angular ones like square, triangles, etc. in another
+                    category. You can try rotating the cubic shape around to see
+                    how its silhouette changes based on the perspective. </p>
+                <div id="MahsaLogic1" hight="50%">
+                </div>
             </div>
         </div>
-        <div style="text-align:center"> <!-- one eye gif -->
-            <img
-                srcset="https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/a/af/CyclopsAlien.gif/revision/latest/thumbnail/width/360/height/450?cb=20191209164832"
-                height="70px">
+        <div id="guide for 3d plotly">
+            <!--Help guide for 3d scatter plotly -->
+            <div class="guide">
+                <div style="text-align:right">
+                    <p id="guideMe">chart guide<br /> trace 0: Round shapes<br />trace
+                        1: Pointy shapes<br />trace 2: Light<br />trace 3:
+                        Other<br />----------<br />xaxis:
+                        Latitude<br />yaxis: Longitude<br />zaxis:
+                        Time(Hour)</p>
+                    <div style="text-align:center">
+                        <!-- plotly 3d scstter plot -->
+                        <div id="mahsa_plotly">
+                        </div>
+                    </div>
+                    <div style="text-align:left"> <!-- one eye gif -->
+                        <img
+                            srcset="https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/a/af/CyclopsAlien.gif/revision/latest/thumbnail/width/360/height/450?cb=20191209164832"
+                            height="40px">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="../plots/plot_Mahsa.js"></script>

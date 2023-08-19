@@ -187,7 +187,6 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
     // gathering the latitude, longitude, time and shape of reports on a date
     function getInfo(list) {
         /* A function to cateogorise the data by shape */
-        let shapes = [];
         let round = [];
         let pointy = [];
         let light = [];
@@ -195,7 +194,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         for (let i = 0; i < list.length; i++) {
             target = list[i];
             let info = [];
-            if (target.shape == "disk" && target.shape == "circle" || target.shape == "cigar" || target.shape == "sphere" || target.shape == "egg" || target.shape == "oval" || target.shape == "fireball" || target.shape == "cylinder") {
+            if (target.shape == "disk" || target.shape == "circle" || target.shape == "cigar" || target.shape == "sphere" || target.shape == "egg" || target.shape == "oval" || target.shape == "fireball" || target.shape == "cylinder") {
                 info.push(target.latitude);
                 info.push(target.longitude);
                 let time = target.time;
@@ -232,10 +231,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
                 others.push(info);
             };
         };
-        shapes.push(round);
-        shapes.push(pointy);
-        shapes.push(light);
-        shapes.push(others);
+        let shapes = [round, pointy, light, others];
         return shapes;
     };
     console.log(getInfo(dateOne));
@@ -262,6 +258,10 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         let pointy = plotInfo[1];
         let light = plotInfo[2];
         let other = plotInfo[3];
+        console.log("round", round.length)
+        console.log("pointy", pointy.length)
+        console.log("light", light.length)
+        console.log("other", other.length)
         let x1 = round.map(sublist => sublist[0]);
         let y1 = round.map(sublist => sublist[1]);
         let z1 = round.map(sublist => sublist[2]);
@@ -280,7 +280,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         console.log(y1);
         console.log(z1);
         // ploting the plot
-        let Round = {
+        let trace0 = {
             x: x1, y: y1, z: z1,
             mode: 'markers',
             marker: {
@@ -294,7 +294,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
             },
             type: 'scatter3d'
         };
-        let Pointy = {
+        let trace1 = {
             x: x2, y: y2, z: z2,
             mode: 'markers',
             marker: {
@@ -308,7 +308,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
             },
             type: 'scatter3d'
         };
-        let Light = {
+        let trace2 = {
             x: x3, y: y3, z: z3,
             mode: 'markers',
             marker: {
@@ -322,7 +322,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
             },
             type: 'scatter3d'
         };
-        let Other = {
+        let trace3 = {
             x: x4, y: y4, z: z4,
             mode: 'markers',
             marker: {
@@ -338,13 +338,14 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         };
 
 
-        let data = [Round, Pointy, Light, Other];
+        let data = [trace0, trace1, trace2, trace3];
         let layout = {
+            title: "Location Time vs Reported Shape",
             margin: {
-                l: 0,
-                r: 0,
-                b: 0,
-                t: 0
+                l: 10,
+                r: 10,
+                b: 10,
+                t: 100
             },
             xaxis: { title: "Latitude" },
             yaxis: { title: "Longityde" },
@@ -353,6 +354,27 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         };
         Plotly.newPlot('mahsa_plotly', data, layout);
     };
+    // logic plotly plots
+    // rubic plot
+    let intensity = [0, 0.14285714285714285, 0.2857142857142857, 0.42857142857142855, 0.5714285714285714, 0.7142857142857143, 0.8571428571428571, 1];
+
+    let dataLogic = [{
+        type: "mesh3d",
+        x: [0, 0, 1, 1, 0, 0, 1, 1],
+        y: [0, 1, 1, 0, 0, 1, 1, 0],
+        z: [0, 0, 0, 0, 1, 1, 1, 1],
+        i: [7, 0, 0, 0, 4, 4, 6, 6, 4, 0, 3, 2],
+        j: [3, 4, 1, 2, 5, 6, 5, 2, 0, 1, 6, 3],
+        k: [0, 7, 2, 3, 6, 7, 1, 1, 5, 5, 7, 6],
+        intensity: intensity,
+        colorscale: [
+            [0, 'rgb(117, 117, 117)'],
+            [0.5, 'rgb(175, 177, 174)'],
+            [1, 'rgb(216, 216, 216)']
+        ]
+    }
+    ];
+    Plotly.newPlot('MahsaLogic1', dataLogic, {});
     // Make the map update on change dates
     d3.selectAll(".MahsaDateOptions").on("change", function () {
         let ID = this.options[this.selectedIndex].value; // Get the choisen id

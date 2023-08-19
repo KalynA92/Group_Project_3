@@ -70,10 +70,14 @@ html {
 /* Plotly plot */
 #mahsa_plotly {
     margin: 20px;
-    border-radius: 10px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding: 10px;
-    border: 5px block #ffffff;
+}
+
+/* Guide box */
+#guideMe {
+    color: #ffffff;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 14px;
 }
