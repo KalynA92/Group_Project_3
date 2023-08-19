@@ -155,7 +155,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
             attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         });
 
-        let  terrain = L.tileLayer('http://stamen-tiles-c.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+        let terrain = L.tileLayer('http://stamen-tiles-c.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
             maxZoom: 20,
             attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         });
@@ -186,6 +186,8 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
     /************ 3D plotly ************/
     // gathering the latitude, longitude, time and shape of reports on a date
     function getInfo(list) {
+        /* A function to cateogorise the data by shape */
+        let shapes = [];
         let round = [];
         let pointy = [];
         let light = [];
@@ -193,67 +195,173 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
         for (let i = 0; i < list.length; i++) {
             target = list[i];
             let info = [];
-            if (target.shape == "disk" && "circle" && "cigar" && "sphere" && "egg" && "oval" && "fireball" && "cylinder"){
-                info.push(target.latidude);
+            if (target.shape == "disk" && target.shape == "circle" || target.shape == "cigar" || target.shape == "sphere" || target.shape == "egg" || target.shape == "oval" || target.shape == "fireball" || target.shape == "cylinder") {
+                info.push(target.latitude);
                 info.push(target.longitude);
                 let time = target.time;
-                let splited = time.splot(":");
+                let splited = time.split(":");
                 let hour = (parseInt(splited[0]));
                 info.push(hour);
                 round.push(info);
             }
-            else if (target.shape == "triangle" && "rectangle" ){
-                info.push(target.latidude);
+            else if (target.shape == "triangle" || target.shape == "rectangle") {
+                info.push(target.latitude);
                 info.push(target.longitude);
                 let time = target.time;
-                let splited = time.splot(":");
+                let splited = time.split(":");
                 let hour = (parseInt(splited[0]));
                 info.push(hour);
                 pointy.push(info);
             }
-            else if (target.shape == "light" && "flash"){
-                info.push(target.latidude);
+            else if (target.shape == "light" || target.shape == "flash") {
+                info.push(target.latitude);
                 info.push(target.longitude);
                 let time = target.time;
-                let splited = time.splot(":");
+                let splited = time.split(":");
                 let hour = (parseInt(splited[0]));
                 info.push(hour);
                 light.push(info);
             }
-            else if (target.shape == "unknown" && "other" && "changing" && "formation" ){
-                info.push(target.latidude);
+            else {
+                info.push(target.latitude);
                 info.push(target.longitude);
                 let time = target.time;
-                let splited = time.splot(":");
+                let splited = time.split(":");
                 let hour = (parseInt(splited[0]));
                 info.push(hour);
                 others.push(info);
             };
-
-
-
-
+        };
+        shapes.push(round);
+        shapes.push(pointy);
+        shapes.push(light);
+        shapes.push(others);
+        return shapes;
+    };
+    console.log(getInfo(dateOne));
+    // function to make the plotly plot with a date
+    function plotIt(ID) {
+        let dateInfo = [];
+        if (ID == 0) {
+            dateInfo = dateOne;
+        }
+        else if (ID == 1) {
+            dateInfo = dateTwo;
+        }
+        else if (ID == 2) {
+            dateInfo = dateThree;
+        }
+        else if (ID == 3) {
+            dateInfo = dateFour;
+        }
+        else if (ID == 4) {
+            dateInfo = dateFive;
+        };
+        let plotInfo = getInfo(dateInfo);
+        let round = plotInfo[0];
+        let pointy = plotInfo[1];
+        let light = plotInfo[2];
+        let other = plotInfo[3];
+        let x1 = round.map(sublist => sublist[0]);
+        let y1 = round.map(sublist => sublist[1]);
+        let z1 = round.map(sublist => sublist[2]);
+        let x2 = pointy.map(sublist => sublist[0]);
+        let y2 = pointy.map(sublist => sublist[1]);
+        let z2 = pointy.map(sublist => sublist[2]);
+        let x3 = light.map(sublist => sublist[0]);
+        let y3 = light.map(sublist => sublist[1]);
+        let z3 = light.map(sublist => sublist[2]);
+        let x4 = other.map(sublist => sublist[0]);
+        let y4 = other.map(sublist => sublist[1]);
+        let z4 = other.map(sublist => sublist[2]);
+        console.log("others", other);
+        console.log("round", round);
+        console.log("x1", x1);
+        console.log(y1);
+        console.log(z1);
+        // ploting the plot
+        let Round = {
+            x: x1, y: y1, z: z1,
+            mode: 'markers',
+            marker: {
+                size: 20,
+                color: 'rgb(238, 5, 242)',
+                line: {
+                    color: 'rgba(238, 5, 242, 0.14)',
+                    width: 1
+                },
+                opacity: 0.6
+            },
+            type: 'scatter3d'
+        };
+        let Pointy = {
+            x: x2, y: y2, z: z2,
+            mode: 'markers',
+            marker: {
+                size: 20,
+                color: 'rgb(31, 8, 2)',
+                line: {
+                    color: 'rgba(5, 242, 219, 0.14)',
+                    width: 1
+                },
+                opacity: 0.6
+            },
+            type: 'scatter3d'
+        };
+        let Light = {
+            x: x3, y: y3, z: z3,
+            mode: 'markers',
+            marker: {
+                size: 20,
+                color: 'rgb(147, 204, 24)',
+                line: {
+                    color: 'rgba(69, 72, 140, 0.14)',
+                    width: 1
+                },
+                opacity: 0.6
+            },
+            type: 'scatter3d'
+        };
+        let Other = {
+            x: x4, y: y4, z: z4,
+            mode: 'markers',
+            marker: {
+                size: 20,
+                color: 'rgb(29, 130, 242)',
+                line: {
+                    color: 'rgba(217, 37, 37, 0.14)',
+                    width: 1
+                },
+                opacity: 0.6
+            },
+            type: 'scatter3d'
         };
 
-        return info;
+
+        let data = [Round, Pointy, Light, Other];
+        let layout = {
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 0
+            },
+            xaxis: { title: "Latitude" },
+            yaxis: { title: "Longityde" },
+            zaxis: { title: "Hour" }
+
+        };
+        Plotly.newPlot('mahsa_plotly', data, layout);
     };
-
-
-
-
-
-
-
-
-
-
     // Make the map update on change dates
     d3.selectAll(".dateOptions").on("change", function () {
         let ID = this.options[this.selectedIndex].value; // Get the choisen id
         mapMe(parseInt(ID));
+        plotIt(parseInt(ID));
     });
 
     mapMe(parseInt(chosenId)); // Call the mapper for the preload map
+    plotIt(parseInt(chosenId));
 
 });
 
