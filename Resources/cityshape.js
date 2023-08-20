@@ -1,4 +1,5 @@
-[{"Shape":"fireball","Totals":11},
+most_active_date = [
+{"Shape":"fireball","Totals":11},
 {"Shape":"circle","Totals":6},
 {"Shape":"light","Totals":3},
 {"Shape":"unknown","Totals":3},

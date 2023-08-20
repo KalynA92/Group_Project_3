@@ -5,7 +5,7 @@
 
 // Promise Pending
 const dataPromise = d3.json(kurl);
-console.log("Data Promise: ", dataPromise);
+console.log("Data: ", dataPromise);
 
 // Fetch the JSON data and console log it
 d3.json(kurl).then(function(data) {
