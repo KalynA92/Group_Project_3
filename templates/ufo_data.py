@@ -16,7 +16,7 @@ user = 'postgres'
 password = 'postgres'
 host = '127.0.0.1'
 port = 5432
-database = 'postgres'
+database = 'ufo_db'
 
 # PYTHON FUNCTION TO CONNECT TO THE POSTGRESQL DATABASE AND
 # RETURN THE SQLACHEMY ENGINE OBJECT
@@ -64,7 +64,6 @@ def welcome():
         f"/api/v1.0/shapes<br/>"
         f"/api/v1.0/cities"
     )
-
 
 # @app.route("/api/v1.0/names")
 # def names():

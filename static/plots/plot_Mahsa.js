@@ -31,7 +31,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
     timeStamps.push(dateThree[0].timestamp);
     timeStamps.push(dateFour[0].timestamp);
     timeStamps.push(dateFive[0].timestamp);
-    console.log("timeStamps", timeStamps);
+    // console.log("timeStamps", timeStamps);
 
     // Define a function that converts unix timestamps to datetime
     function dater(x) {
