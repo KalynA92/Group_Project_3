@@ -8,6 +8,6 @@ const dataPromise = d3.json(kurl);
 console.log("Data Promise: ", dataPromise);
 
 // Fetch the JSON data and console log it
-d3.json(url).then(function(data) {
+d3.json(kurl).then(function(data) {
   console.log(data);
 });
