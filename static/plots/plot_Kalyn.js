@@ -1,22 +1,13 @@
 /******************************************
  ********* Kalyn's Plot ******************
  *****************************************/
+ const kurl = "https://raw.githubusercontent.com/KalynA92/Group_Project_3/main/Resources/cityshape.js";
 
-/******** Data gathering **********/
-console.log(shapes);
+// Promise Pending
+const dataPromise = d3.json(kurl);
+console.log("Data Promise: ", dataPromise);
 
-let frequencyOfShape = data.sort((a, b) => b.Totals - a.Totals)
-
-let trace1 = {
-    x: shapes.map(row => row.Shape),
-    y: shapes.map(row => row.Totals),
-    type:"bar"
-};
-
-let traceShapes = [trace1];
-
-let layout = {
-    title: "Frequency of Shapes for Most active date"
-};
-
-Plotly.newPLot("plot", traceShapes, layout);
+// Fetch the JSON data and console log it
+d3.json(kurl).then(function(data) {
+  console.log(data);
+});
