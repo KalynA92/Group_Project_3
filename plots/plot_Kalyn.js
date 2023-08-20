@@ -1,22 +1,8 @@
 /******************************************
  ********* Kalyn's Plot ******************
  *****************************************/
+ const kurl = 
 
-/******** Data gathering **********/
-console.log(shapes);
+ const cityShape = d3.json(kurl)
 
-let frequencyOfShape = data.sort((a, b) => b.Totals - a.Totals)
-
-let trace1 = {
-    x: shapes.map(row => row.Shape),
-    y: shapes.map(row => row.Totals),
-    type:"bar"
-};
-
-let traceShapes = [trace1];
-
-let layout = {
-    title: "Frequency of Shapes for Most active date"
-};
-
-Plotly.newPLot("plot", traceShapes, layout);
+ console.log ()
