@@ -1,4 +1,4 @@
-let shapes = [{
+[{
   Shape:"fireball",
   Totals:11
 },
