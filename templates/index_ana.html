@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/css/style_mahsa.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <style>
+        body {
+            margin: 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            background: lightgray;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        
+        }
+
+        nav h1 {
+            font-size: 2rem;
+            background: black;
+            border-radius: 8px;
+            color: white;
+            padding: 5px;
+        }
+
+        nav div {
+            width: 50%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav div a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-bottom: 2px solid #000;
+        }
+
+        #countriesCart, #statesCart {
+            width: 60%;
+            margin: 20px auto;
+            border-radius: 12px;
+            border: 2px solid #000;
+        }
+    </style>
+
+    <nav>
+        <h1>UFO Analysis</h1>
+        <div class=""><a href="/kalyn">Kalyn</a><a href="/">Ana</a><a href="/mahsa">Mahsa</a></div>
+    </nav>
+
+
+    
+
+<div id="countriesChart"></div>
+<div id="statesChart"></div>
+
+
+
+
+    <script src="https://cdn.plot.ly/plotly-2.25.2.min.js" charset="utf-8"></script>
+    <script src="static/plots/ana.js"></script>
+</body>
+</html>

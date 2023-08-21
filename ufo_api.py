@@ -31,9 +31,17 @@ app = Flask(__name__)
 # Flask Routes
 #################################################
 
-@app.route("/")
+@app.route("/mahsa")
+def mahsa():
+    return render_template('index_Mahsa.html')
+
+@app.route("/kalyn")
 def welcome():
     return render_template('index.html')
+
+@app.route("/")
+def ana():
+    return render_template('index_ana.html')
 
 @app.route("/api/ufo_data")
 def ufoData():
@@ -42,16 +50,18 @@ def ufoData():
 
     """Return a list of all passenger names"""
     # Query all passengers
-    results = session.query(func.count()).group_by(ufo_data.country).all()
 
-    print('result',results)
+    return { id:country for id, country in  session.query(ufo_data.id, ufo_data.country).all()}
 
-    session.close()
+@app.route("/api/states")
+def ufoCities():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
-    # Convert list of tuples into normal list
-    all_names = list(np.ravel(results))
+    """Return a list of all passenger names"""
+    # Query all passengers
 
-    return jsonify(all_names)
+    return { str(date)[:10]:state for date, state in  session.query(ufo_data.timestamp, ufo_data.state).filter(ufo_data.country=='us').all()}
 
 
 # @app.route("/api/v1.0/passengers")

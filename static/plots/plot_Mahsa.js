@@ -113,7 +113,7 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
 
     // marker
     let ufoIcon = L.icon({
-        iconUrl: 'UFO.png',
+        iconUrl: 'static/images/UFO.png',
         iconSize: [38, 38], // size of the icon
     });
 
