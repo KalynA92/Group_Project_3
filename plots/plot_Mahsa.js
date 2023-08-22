@@ -510,30 +510,66 @@ d3.json(mahsaUrl).then(function (data) {  // Creat a read function and do all th
  /******************************************
  ********* Shree's Plot ******************
  *****************************************/
+ const hourlyObsUrl = "http://127.0.0.1:5000/api/hourlyObservations";
+ const monthlyObsUrl = "http://127.0.0.1:5000/api/monthlyObservations";
+ const yearlyObsUrl = "http://127.0.0.1:5000/api/yearlyObservations";
 
+ d3.json(hourlyObsUrl).then(function(observations) {
+    console.log(observations);
+    var hourlyData = [
+      {
+        x: Object.keys(observations),
+        y: Object.values(observations),
+        type: 'bar'
+      }
+    ];
+    Plotly.newPlot('hourlyChart', hourlyData);
+  })
+  
+  d3.json(monthlyObsUrl).then(function(monthlyObs) {
+    console.log(monthlyObs);
+    var monthlyData = [
+      {
+        x: ['Jan','Feb','Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+        y: Object.values(monthlyObs),
+        type: 'bar'
+      }
+    ];
+    Plotly.newPlot('monthlyChart', monthlyData);
+  })
+  
+  d3.json(yearlyObsUrl).then(function(yearlyObs) {
+    console.log(yearlyObs);
+    var yearlyData = [
+      {
+        x: Object.keys(yearlyObs),
+        y: Object.values(yearlyObs)
+      }
+    ];
+    Plotly.newPlot('yearlyChart', yearlyData);
+  })
 
  /******************************************
  ********* Ana's Plot ******************
  *****************************************/
- let apiCountry;
-  let apiStates;
-  let barData = {};
-  
-const getData = async () => {
-    apiCountry =  await (await fetch('/api/ufo_data')).json();
-    apiStates =  await (await fetch('/api/states')).json();
 
-    Object.values(apiCountry).forEach(val => {
+const countriesUrl = "http://127.0.0.1:5000/api/ufo_data";
+const statesUrl = "http://127.0.0.1:5000/api/states";
+
+let apiCountry;
+let apiStates;
+let barData = {};
+
+d3.json(countriesUrl).then(function(countries) {
+    console.log(countries);
+    Object.values(countries).forEach(val => {
         if(!Object.keys(barData).includes(val)) {
             barData[val] = 0;
         };
         
         barData[val] += 1
     })
-
-    console.log(apiCountry);
-
-    var data = [
+    var countryData = [
         {
           x: Object.keys(barData),
           y: Object.values(barData),
@@ -541,16 +577,16 @@ const getData = async () => {
         }
       ];
       
-      Plotly.newPlot('countriesChart', data);
+      Plotly.newPlot('countriesChart', countryData);
+  })
 
-    var data2 = [
-        {
-          x: Object.keys(apiStates),
-          y: Object.values(apiStates),
-        }
-      ];
-      
-      Plotly.newPlot('statesChart', data2);
-};
-
-getData();
+  d3.json(statesUrl).then(function(states) {
+    console.log(states);
+    var stateData = [
+      {
+        x: Object.keys(states),
+        y: Object.values(states)
+      }
+    ];
+    Plotly.newPlot('statesChart', stateData);
+  })

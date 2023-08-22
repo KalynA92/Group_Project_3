@@ -3,7 +3,7 @@ import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, extract, func
 
 from flask import Flask, jsonify, render_template
 
@@ -63,29 +63,35 @@ def ufoCities():
 
     return { str(date)[:10]:state for date, state in  session.query(ufo_data.timestamp, ufo_data.state).filter(ufo_data.country=='us').all()}
 
+@app.route("/api/hourlyObservations")
+def hourlyObservations():
+    session = Session(engine)
+    day_night_observations = session.query(extract('hour', ufo_data.timestamp), func.count(
+        extract('hour', ufo_data.timestamp))).group_by(extract('hour', ufo_data.timestamp)).order_by(extract('hour', ufo_data.timestamp)).all()
+    
+    hourlyObservations = {str(hour):obss for hour, obss in day_night_observations}
+    
+    return jsonify(hourlyObservations)
 
-# @app.route("/api/v1.0/passengers")
-# def passengers():
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+@app.route("/api/monthlyObservations")
+def monthlyObservations():
+    session = Session(engine)
+    monthly_observations = session.query(extract('month', ufo_data.timestamp), func.count(
+        extract('month', ufo_data.timestamp))).group_by(extract('month', ufo_data.timestamp)).order_by(extract('month', ufo_data.timestamp)).all()
+    
+    monthlyObservations = {str(month):obss for month, obss in monthly_observations}
+    
+    return jsonify(monthlyObservations)
 
-#     """Return a list of passenger data including the name, age, and sex of each passenger"""
-#     # Query all passengers
-#     results = session.query(Passenger.name, Passenger.ufo_data, Passenger.sex).all()ta
-
-#     session.close()
-
-#     # Create a dictionary from the row data and append to a list of all_passengers
-#     all_passengers = []
-#     for name, age, sex in results:
-#         passenger_dict = {}
-#         passenger_dict["name"] = name
-#         passenger_dict["age"] = age
-#         passenger_dict["sex"] = sex
-#         all_passengers.append(passenger_dict)
-
-#     return jsonify(all_passengers)
-
+@app.route("/api/yearlyObservations")
+def yearlyObservations():
+    session = Session(engine)
+    yearly_observations = session.query(extract('year', ufo_data.timestamp), func.count(
+        extract('year', ufo_data.timestamp))).group_by(extract('year', ufo_data.timestamp)).order_by(extract('year', ufo_data.timestamp)).all()
+    
+    yearlyObservations = {str(year):obss for year, obss in yearly_observations}
+    
+    return jsonify(yearlyObservations)
 
 if __name__ == '__main__':
     app.run(debug=True)
