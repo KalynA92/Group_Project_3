@@ -40,6 +40,8 @@ I started my analysis with cleaning and sorting the data and columns in the Jupy
 
 ## Ana
 
+I started my analysis from the DataBase and reading the columns in detail. I was curious to know if there were any factors that could determine UFO sightings. I started analyzing the countries that we have in the data. Having as a result more U.S., I wanted to analyze the sightings in a timeline. I found that the events are not repeated in the same state in a time sequence, but they start to be much more documented over the years. With this, the question arose as to what could have caused this phenomenon that seemed to occur in one agricultural town in Missouri to become evident throughout the United States. 
+I grouped the countries for this analysis and for the timeline, I did a grouping by states from the Json file. Through postgres I worked on generating the connection between the Flask Api and the DataBase. Once I verified that the ufo_api.py ran and connected to the database, I checked that the style and proportion of the graphs I had coded worked on a bar chart and a timeline.
 
 
 
