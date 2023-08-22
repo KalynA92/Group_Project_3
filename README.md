@@ -36,17 +36,7 @@ I started my analysis with a blank jupyter notebook. I was particularly interest
 
 ## Sree
 
-
-
-
-
-
-
-
-
-
-
-
+I started my analysis with cleaning and sorting the data and columns in the Jupyter Notebook. I was particularly interested in change in frequency of the observations with respect to day, hour and year. Converted the date timestamp to 24-hour format to use it for visualizations. Created a new column Id with unique values and added it to the data frame. Reordered the columns and generated the CSV file and exported it to Resources to load the data in Database. Using pgadmin4 and postgres created new database and table to load the UFO data. Used postgres configuration to establish the connectivity between the Flask API and DB. Created Flask API methods to retrieve the data from Database for the hourly, monthly and yearly data. Used the API endpoints in the JS file and retrieved the data from DB using D3. Plotted the results in the bar chart to show the change in the frequency of observations – hourly, monthly and yearly.
 
 ## Ana
 
