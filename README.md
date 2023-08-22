@@ -1,4 +1,7 @@
-# Group_Project_3# Group 3 Project
+![image](https://github.com/KalynA92/Group_Project_3/assets/131544259/a0896a59-f81f-4f1a-b79c-05c5186fde03)
+
+
+# Group Project 3
 
 # Reported UFO Sightings from 1910 to 2014
 
