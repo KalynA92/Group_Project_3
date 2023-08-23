@@ -48,11 +48,10 @@ I grouped the countries for this analysis and for the timeline, I did a grouping
 
 
 
-
-
-
-
-
+## Steps to Create DB and Load Data
+1. Create DB - 'ufo_db'
+2. Execute the sql file - 'ufo_schema.sql' available under Resources folder
+3. Once the Table created, use the csv file - 'orderedData.csv' and load data to the above table created.
 
 ## References
 

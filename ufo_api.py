@@ -9,7 +9,7 @@ from flask import Flask, jsonify, render_template
 
 
 #################################################
-# Database Setup
+# Database Setup - please refer to readme file for the steps to create DB and load Data.
 #################################################
 engine = create_engine("postgresql://postgres:postgres@localhost:5432/ufo_db")
 
